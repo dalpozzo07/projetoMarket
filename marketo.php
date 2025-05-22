@@ -4,6 +4,10 @@ $usuarios = [
     'admin' => '1404'
 ];
 
+$venda = [
+    'item' => 'preco'
+    ];
+
 
 function login($usuario, $senha, $usuarios){
     if (isset($usuarios[$usuario]) && $usuarios[$usuario] === $senha) {
@@ -26,6 +30,22 @@ function cadastrarUsuario(&$usuarios){
     }
 }
 
+function venda(&$venda){
+    $item = readline("Insira o nome do produto: ");
+    (float)$preco = readline("Insira o preço do produto: ");
+
+    while(true){
+    if ((float)$preco <= 0){
+        echo "Preço inválido!" . PHP_EOL;
+        $preco = readline("Insira o preço do produto: ");
+    }else{
+        break;
+    }
+}
+    
+    echo "O nome do produto é $item e o preço $ $preco \n";
+}
+
 while(true){
 
    echo "Digite uma opção:\n";
@@ -42,7 +62,7 @@ $opcao = readline("Opção: ");
             if (login($usuario, $senha, $usuarios)) {
                 echo "Login efetuado com sucesso!" . PHP_EOL;
                 while(true){
-                    
+
                     echo "Digite uma opção:\n";
                     echo "1 - Venda\n";
                     echo "2 - Deslogar\n";
