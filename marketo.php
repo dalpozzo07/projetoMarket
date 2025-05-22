@@ -27,7 +27,7 @@ function cadastrarUsuario(&$usuarios){
 }
 
 while(true){
-    
+
    echo "Digite uma opção:\n";
 echo "1 - Login\n";
 echo "2 - Cadastrar\n";
@@ -41,9 +41,30 @@ $opcao = readline("Opção: ");
             $senha = readline("Digite a senha: ");
             if (login($usuario, $senha, $usuarios)) {
                 echo "Login efetuado com sucesso!" . PHP_EOL;
-            }
+                while(true){
+                    
+                    echo "Digite uma opção:\n";
+                    echo "1 - Venda\n";
+                    echo "2 - Deslogar\n";
+                    $opcao = readline("Opção: ");
         
+                switch($opcao){
+                    case '1':
+                        venda($venda);
+                        break;
+
+                    case '2':
+                        echo "deslogando
+                            " . PHP_EOL;
+                        break 2;
+
+                    default:
+                        echo "Opção inválida!" . PHP_EOL;
+                }
+                }
+            }
             break;
+
 
         case '2':
             cadastrarUsuario($usuarios);
