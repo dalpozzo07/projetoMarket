@@ -4,6 +4,7 @@ $usuarios = [
     'admin' => '1404'
 ];
 
+
 function login($usuario, $senha, $usuarios){
     if (isset($usuarios[$usuario]) && $usuarios[$usuario] === $senha) {
         return true;
@@ -23,4 +24,36 @@ function cadastrarUsuario(&$usuarios){
         $usuarios[$usuario] = $senha;
         echo "Usuário cadastrado com sucesso!" . PHP_EOL;
     }
+}
+
+while(true){
+    
+   echo "Digite uma opção:\n";
+echo "1 - Login\n";
+echo "2 - Cadastrar\n";
+echo "3 - Sair\n";
+
+$opcao = readline("Opção: ");
+
+    switch($opcao){
+        case '1':
+            $usuario = readline("Digite o usuário: ");
+            $senha = readline("Digite a senha: ");
+            if (login($usuario, $senha, $usuarios)) {
+                echo "Login efetuado com sucesso!" . PHP_EOL;
+            }
+        
+            break;
+
+        case '2':
+            cadastrarUsuario($usuarios);
+            break;
+
+        case '3':
+            echo "Encerrando o programa" . PHP_EOL;
+            exit;
+        default:
+            echo "Opção inválida" . PHP_EOL;
+    
+}
 }
