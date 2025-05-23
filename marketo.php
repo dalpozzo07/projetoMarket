@@ -69,8 +69,34 @@ $opcao = readline("Opção: ");
             if (login($usuario, $senha, $usuarios)) {
                 system('clear');
                 echo "Login efetuado com sucesso!" . PHP_EOL;
+                
+                while(true){
+                    echo "===== Menu Vendas ====" . PHP_EOL;
+                    echo "Digite uma opção:\n";
+                    echo "1 - Venda\n";
+                    echo "2 - Deslogar\n";
+                    echo "======================" . PHP_EOL;
+                    $opcao2 = readline("Opção: ");
+        
+                switch($opcao2){
+                    
+                    case '1':
+                        $item = readline("Insira o nome do produto: ");
+                        $preco = (float)readline("Insira o preço do produto: ");
+                
+                        break;
+
+                    case '2':
+                        echo "Deslogando" . PHP_EOL;
+                        break 2;
+
+                    default:
+                        echo "Opção inválida!" . PHP_EOL;
+                }
+                }
             }
             break;
+
 
         case '2':
             cadastrarUsuario($usuarios);
