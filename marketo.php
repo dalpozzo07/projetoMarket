@@ -66,14 +66,14 @@ function registrarLog($usuario, $item, $preco, &$log){
 
     $data = date("d/m/Y H:i:s");
     $linha = "O usúario $usuario realizou uma venda de $item por 
-    $preco em $data" . PHP_EOL;
+    R$ $preco em $data" . PHP_EOL;
     $log[] = $linha;
     
 }
 
 while(true){
 
-system('clear');
+
 echo "==== Menu ====" . PHP_EOL;
 echo "Digite uma opção:\n";
 echo "1 - Login\n";
@@ -89,7 +89,7 @@ $opcao = readline("Opção: ");
             $usuario = readline("Digite o usuário: ");
             $senha = readline("Digite a senha: ");
             if (login($usuario, $senha, $usuarios)) {
-                system('clear');
+                
                 echo "Login efetuado com sucesso!" . PHP_EOL;
                 
                 while(true){
@@ -99,7 +99,7 @@ $opcao = readline("Opção: ");
                     echo "1 - Venda\n";
                     echo "2 - Visualizar log\n";
                     echo "3 - Deslogar\n";
-                    echo "============================" . PHP_EOL;
+                    echo "===========================" . PHP_EOL;
                     $opcao2 = readline("Opção: ");
         
                 switch($opcao2){
