@@ -7,7 +7,8 @@ $usuarios = [
 ];
 
 $vendas = [];
-
+$log = [];
+$totalVendas = 0;
 
 function login($usuario, $senha, $usuarios){
     if (isset($usuarios[$usuario]) && $usuarios[$usuario] === $senha) {
@@ -43,11 +44,32 @@ function adicionarVendas($item, $preco, &$vendas){
 }
 
 $vendas[$item] = $preco;
+global $totalVendas;
+$totalVendas += $preco;
 
  echo "O nome do produto é $item, e o preço R$$preco \n";
  
 }
 
+function visualizarLog($log){
+    if($log == true){
+    foreach($log as $linha){
+        echo $linha;
+    }
+}else{
+    echo "O log está vazio! \n";
+}
+}
+
+
+function registrarLog($usuario, $item, $preco, &$log){
+
+    $data = date("d/m/Y H:i:s");
+    $linha = "O usúario $usuario realizou uma venda de $item por 
+    $preco em $data" . PHP_EOL;
+    $log[] = $linha;
+    
+}
 
 while(true){
 
@@ -71,11 +93,13 @@ $opcao = readline("Opção: ");
                 echo "Login efetuado com sucesso!" . PHP_EOL;
                 
                 while(true){
-                    echo "===== Menu Vendas ====" . PHP_EOL;
+                    echo "==== Menu de Vendas =======" . PHP_EOL;
+                    echo "Total de vendas: R$$totalVendas" . PHP_EOL;
                     echo "Digite uma opção:\n";
                     echo "1 - Venda\n";
-                    echo "2 - Deslogar\n";
-                    echo "======================" . PHP_EOL;
+                    echo "2 - Visualizar log\n";
+                    echo "3 - Deslogar\n";
+                    echo "============================" . PHP_EOL;
                     $opcao2 = readline("Opção: ");
         
                 switch($opcao2){
@@ -83,10 +107,15 @@ $opcao = readline("Opção: ");
                     case '1':
                         $item = readline("Insira o nome do produto: ");
                         $preco = (float)readline("Insira o preço do produto: ");
-                
+                        adicionarVendas($item, $preco, $vendas);
+                        registrarLog($usuario, $item, $preco, $log);
                         break;
 
                     case '2':
+                        visualizarLog($log);
+                        break;
+
+                    case '3':
                         echo "Deslogando" . PHP_EOL;
                         break 2;
 
