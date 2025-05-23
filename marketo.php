@@ -1,12 +1,12 @@
 <?php
 
+date_default_timezone_set('America/Sao_Paulo');
+
 $usuarios = [
-    'admin' => '1404'
+    'admin' => '1404',
 ];
 
-$venda = [
-    'item' => 'preco'
-    ];
+$vendas = [];
 
 
 function login($usuario, $senha, $usuarios){
@@ -30,61 +30,47 @@ function cadastrarUsuario(&$usuarios){
     }
 }
 
-function venda(&$venda){
-    $item = readline("Insira o nome do produto: ");
-    (float)$preco = readline("Insira o preço do produto: ");
-
+function adicionarVendas($item, $preco, &$vendas){
+    
     while(true){
+
     if ((float)$preco <= 0){
         echo "Preço inválido!" . PHP_EOL;
         $preco = readline("Insira o preço do produto: ");
-    }else{
-        break;
+    }else{break;
+    
     }
 }
-    
-    echo "O nome do produto é $item e o preço $ $preco \n";
+
+$vendas[$item] = $preco;
+
+ echo "O nome do produto é $item, e o preço R$$preco \n";
+ 
 }
+
 
 while(true){
 
-   echo "Digite uma opção:\n";
+system('clear');
+echo "==== Menu ====" . PHP_EOL;
+echo "Digite uma opção:\n";
 echo "1 - Login\n";
 echo "2 - Cadastrar\n";
 echo "3 - Sair\n";
+echo "==============" . PHP_EOL;
 
 $opcao = readline("Opção: ");
 
     switch($opcao){
+
         case '1':
             $usuario = readline("Digite o usuário: ");
             $senha = readline("Digite a senha: ");
             if (login($usuario, $senha, $usuarios)) {
+                system('clear');
                 echo "Login efetuado com sucesso!" . PHP_EOL;
-                while(true){
-
-                    echo "Digite uma opção:\n";
-                    echo "1 - Venda\n";
-                    echo "2 - Deslogar\n";
-                    $opcao = readline("Opção: ");
-        
-                switch($opcao){
-                    case '1':
-                        venda($venda);
-                        break;
-
-                    case '2':
-                        echo "deslogando
-                            " . PHP_EOL;
-                        break 2;
-
-                    default:
-                        echo "Opção inválida!" . PHP_EOL;
-                }
-                }
             }
             break;
-
 
         case '2':
             cadastrarUsuario($usuarios);
@@ -93,6 +79,7 @@ $opcao = readline("Opção: ");
         case '3':
             echo "Encerrando o programa" . PHP_EOL;
             exit;
+
         default:
             echo "Opção inválida" . PHP_EOL;
     
